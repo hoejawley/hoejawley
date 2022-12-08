@@ -6,6 +6,21 @@
   <label for="fname">First name:</label>
   <input type="text" id="fname" name="fname"><br><br>
       <input type="text" value="Submit">
+  <a class="trigger_popup_fricc">Click here to show the popup</a>
+
+$(window).load(function () {
+    $(".trigger_popup_fricc").click(function(){
+       $('.hover_bkgr_fricc').show();
+    });
+    $('.hover_bkgr_fricc').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+    $('.popupCloseButton').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+});
+
+
   
  
     
