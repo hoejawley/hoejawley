@@ -6,99 +6,126 @@
   <label for="fname">First name:</label>
   <input type="text" id="fname" name="fname"><br><br>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
-<style type="text/css">
-#overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: #000;
-filter:alpha(opacity=70);
--moz-opacity:0.7;
--khtml-opacity: 0.7;
-opacity: 0.7;
-z-index: 100;
-display: none;
-}
-.cnt223 a{
-text-decoration: none;
-}
-.popup{
-width: 100%;
-margin: 0 auto;
-display: none;
-position: fixed;
-z-index: 101;
-}
-.cnt223{
-min-width: 600px;
-width: 600px;
-min-height: 150px;
-margin: 100px auto;
-background: #f3f3f3;
-position: relative;
-z-index: 103;
-padding: 15px 35px;
-border-radius: 5px;
-box-shadow: 0 2px 5px #000;
-}
-.cnt223 p{
-clear: both;
-    color: #555555;
-    /* text-align: justify; */
-    font-size: 20px;
-    font-family: sans-serif;
-}
-.cnt223 p a{
-color: #d91900;
-font-weight: bold;
-}
-.cnt223 .x{
-float: right;
-height: 35px;
-left: 22px;
-position: relative;
-top: -25px;
-width: 34px;
-}
-.cnt223 .x:hover{
-cursor: pointer;
-}
-</style>
-<script type='text/javascript'>
-$(function(){
-var overlay = $('<div id="overlay"></div>');
-overlay.show();
-overlay.appendTo(document.body);
-$('.popup').show();
-$('.close').click(function(){
-$('.popup').hide();
-overlay.appendTo(document.body).remove();
-return false;
-});
-
-
- 
-
-$('.x').click(function(){
-$('.popup').hide();
-overlay.appendTo(document.body).remove();
-return false;
-});
-});
-</script>
-<div class='popup'>
-<div class='cnt223'>
-<h1>Important Notice</h1>
-<p>
-We were affected by the fire next door and will remain closed until further notice.
-<br/>
-<br/>
-<a href='' class='close'>Close</a>
-</p>
+<div class="container">
+	<h1>Click to open Popup</h1>
+	<button id="openMyPopup" data-popup="myPopup" onClick="openPopup('#myPopup')" aria-controls="myPopup" aria-label="Open popup">Open</button>
 </div>
+
+<div class="popup" id="myPopup" aria-hidden="true" onClick="if(event.target == this){closePopup('#myPopup');}">
+	<div class="wrapper" aria-labelledby="popupTitle" aria-describedby="popupText" aria-modal="true">
+		<h2 id="popupTitle">This is my Popup</h2>
+		<p id="popupText">Lorem ipsum dolor sit amet consectetur, adipiscing elit lacinia mus, sapien nibh imperdiet tempus. Vitae massa semper mi sagittis a cum cursus fusce per, gravida tellus metus purus litora nam ultricies donec, nibh dis ligula ad facilisi penatibus condimentum aenean.</p>
+		<button id="closePopup" onClick="closePopup('#myPopup');" aria-label="Close popup">Close</button>
+	</div>
+  <style>
+    $btn-color: #9AD3DE;
+
+html, body {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	text-align: center;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	
+	.container {
+		width: 100%;
+		height: auto;
+		margin: 0 auto;
+	}
+}
+
+h1, h2, p, button {
+	font-family: 'Montserrat', cursive;
+	font-weight: 100;
+}
+
+p, button {
+	font-weight: 300;
+}
+
+h1 {
+	font-size: 40px;
+}
+
+h2 {
+	font-size: 45px;
+}
+
+h1, h2 {
+	text-align: center;
+	color: #666666;
+	margin: 0 0 30px 0;
+}
+
+p {
+	color: #666666;
+	line-height: 1.5;
+}
+
+button {
+	background: $btn-color;
+	border: 0;
+	border-radius: 4px;
+	padding: 15px 30px;
+	font-size: 18px;
+	color: #FFFFFF;
+	cursor: pointer;
+
+	&:focus {
+		outline: none;
+	}
+
+	&:hover {
+		background: lighten($btn-color, 10%);
+	}
+}
+
+.popup {
+	background: rgba(100, 100, 100, 0.6);
+	position: fixed;
+	display: none;
+	z-index: 9999;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+
+	.wrapper {
+		max-width: 600px; // Max-width of popup can be changed
+		width: 70%; // Width of popup
+		position: fixed;
+		transform: translate(-50%, -50%);
+  		left: 50%;
+	   top: 50%;
+		background: #FFFFFF;
+		padding: 30px;
+		border-radius: 10px;
+		box-shadow: 2px 2px 10px 0px rgba(#000000, 0.4);
+	}
+}
+   
+  </style>
+  <script>
+    function openPopup(popup) {
+	/* Open popup and make accessible screen readers */
+	$(popup).show().attr("aria-hidden", "false");
+	/* Focus on element to guide screen readers to popup */
+	$("#closePopup").focus();
+}
+
+function closePopup(popup) {
+	/* Close popup and hide from screen readers */
+	$(popup).hide().attr("aria-hidden", "true");
+	/* Focus screen readers back to button */
+	$("#openMyPopup").focus();
+}
+  </script>
 </div>
     
 
