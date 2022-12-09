@@ -5,128 +5,212 @@
   
   <label for="fname">First name:</label>
   <input type="text" id="fname" name="fname"><br><br>
+<div class="wrap">
 
-<div class="container">
-	<h1>Click to open Popup</h1>
-	<button id="openMyPopup" data-popup="myPopup" onClick="openPopup('#myPopup')" aria-controls="myPopup" aria-label="Open popup">Open</button>
-
-
-<div class="popup" id="myPopup" aria-hidden="true" onClick="if(event.target == this){closePopup('#myPopup');}">
-	<div class="wrapper" aria-labelledby="popupTitle" aria-describedby="popupText" aria-modal="true">
-		<h2 id="popupTitle">This is my Popup</h2>
-		<p id="popupText">Lorem ipsum dolor sit amet consectetur, adipiscing elit lacinia mus, sapien nibh imperdiet tempus. Vitae massa semper mi sagittis a cum cursus fusce per, gravida tellus metus purus litora nam ultricies donec, nibh dis ligula ad facilisi penatibus condimentum aenean.</p>
-		<button id="closePopup" onClick="closePopup('#myPopup');" aria-label="Close popup">Close</button>
-	</div>
-  <style>
-    $btn-color: #9AD3DE;
-
-html, body {
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	margin: 0;
-	position: relative;
-	text-align: center;
-}
-
-body {
-	display: flex;
-	align-items: center;
-	
-	.container {
-		width: 100%;
-		height: auto;
-		margin: 0 auto;
-	}
-}
-
-h1, h2, p, button {
-	font-family: 'Montserrat', cursive;
-	font-weight: 100;
-}
-
-p, button {
-	font-weight: 300;
-}
-
-h1 {
-	font-size: 40px;
-}
-
-h2 {
-	font-size: 45px;
-}
-
-h1, h2 {
-	text-align: center;
-	color: #666666;
-	margin: 0 0 30px 0;
-}
-
-p {
-	color: #666666;
-	line-height: 1.5;
-}
-
-button {
-	background: $btn-color;
-	border: 0;
-	border-radius: 4px;
-	padding: 15px 30px;
-	font-size: 18px;
-	color: #FFFFFF;
-	cursor: pointer;
-
-	&:focus {
-		outline: none;
-	}
-
-	&:hover {
-		background: lighten($btn-color, 10%);
-	}
-}
-
-.popup {
-	background: rgba(100, 100, 100, 0.6);
-	position: fixed;
-	display: none;
-	z-index: 9999;
-	height: 100%;
-	width: 100%;
-	left: 0;
-	top: 0;
-
-	.wrapper {
-		max-width: 600px; // Max-width of popup can be changed
-		width: 70%; // Width of popup
-		position: fixed;
-		transform: translate(-50%, -50%);
-  		left: 50%;
-	   top: 50%;
-		background: #FFFFFF;
-		padding: 30px;
-		border-radius: 10px;
-		box-shadow: 2px 2px 10px 0px rgba(#000000, 0.4);
-	}
-}
-   
-  </style>
-  <script>
-    function openPopup(popup) {
-	/* Open popup and make accessible screen readers */
-	$(popup).show().attr("aria-hidden", "false");
-	/* Focus on element to guide screen readers to popup */
-	$("#closePopup").focus();
-}
-
-function closePopup(popup) {
-	/* Close popup and hide from screen readers */
-	$(popup).hide().attr("aria-hidden", "true");
-	/* Focus screen readers back to button */
-	$("#openMyPopup").focus();
-}
-  </script>
+  <h1>Modal - Pure CSS (no Javascript)</h1>
+  
+  <p>Example of modal in CSS only, here I use the pseudo selector ":target" and no javascript for modal action.</p>
+  
+  <p>This works in IE9+ and all modern browsers.</p>
+  
+  <hr />
+  
+  <a href="#modal-one" class="btn btn-big">Modal!</a>
+ 
+  
 </div>
+ 
+<!-- Modal -->
+<a href="#" class="modal" id="modal-one" aria-hidden="true">
+  </a>
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h2>Modal in CSS?</h2>
+      <a href="#" class="btn-close" aria-hidden="true">×</a>
+    </div>
+    <div class="modal-body">
+      <p>One modal example here! :D</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn">Nice!</a>
+	    <style>
+		    //
+// Variables
+// ----------------------
+
+$gray: #333;
+$gray-light: #aaa;
+$gray-lighter: #eee;
+$space: 40px;
+$blue: #428bca;
+$blue-dark: darken($blue, 5%);
+
+// Mixin for transition/transform
+@mixin translate($x, $y) {
+  -webkit-transform: translate($x, $y);
+      -ms-transform: translate($x, $y); // IE9+
+          transform: translate($x, $y);
+}
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+          transition: $transition;
+}
+@mixin transition-transform($transition) {
+  -webkit-transition: -webkit-transform unquote($transition);
+     -moz-transition: -moz-transform unquote($transition);
+       -o-transition: -o-transform unquote($transition);
+          transition: transform unquote($transition);
+}
+
+//
+// Body
+// ----------------------
+
+body{
+  color: $gray;
+  font-family: 'Helvetica', arial;
+}
+
+.wrap{
+  padding: $space;
+  text-align: center;
+}
+
+hr {
+  clear: both;
+  margin-top: $space;
+  margin-bottom: $space;
+  border: 0;
+  border-top: 1px solid $gray-light;
+}
+
+h1{
+  font-size: 30px;
+  margin-bottom: $space;
+}
+
+p{
+  margin-bottom: $space/2;
+}
+
+//
+// Btn 
+// ----------------------
+
+.btn{
+  background: $blue;
+  border: $blue-dark solid 1px;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 15px;
+  text-decoration: none;
+  text-align: center;
+  min-width: 60px;
+  position: relative;
+  transition: color .1s ease;
+  
+  &:hover{
+    background: $blue-dark;
+  }
+  
+  &.btn-big{
+    font-size: 18px;
+    padding: 15px 20px;
+    min-width: 100px;
+  }
+  
+}
+
+.btn-close{
+  color: $gray-light;
+  font-size: 30px;
+  text-decoration: none;
+  position: absolute; right: 5px; top: 0;
+  
+  &:hover{
+     color: darken($gray-light, 10%);
+  }
+  
+}
+
+//
+// Modal
+// ----------------------
+
+.modal{
+  
+  // This is modal bg
+  &:before{
+    content: ""; 
+    /*display: none;*/
+    background: rgba(0,0,0,0); 
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0; 
+    z-index: -1;
+    
+  }
+  
+  &:target{
+    
+    // Active animate in modal
+    &:before{
+      @include transition-transform("0.9s ease-out");
+    z-index:10;  
+    background: rgba(0,0,0,.6); 
+      /*display: block;*/
+    } 
+  }
+  
+}
+.modal:target + .modal-dialog{
+      @include translate(0, 0);
+      top: 20%;  
+    }
+
+// Modal Dialog
+// ----------------------
+
+.modal-dialog{
+  background: #fefefe;
+  border: $gray solid 1px;
+  border-radius: 5px;
+  margin-left: -200px;
+  position: fixed; 
+  left: 50%; 
+  top: -100%;  
+  z-index: 11; 
+  width: 360px;
+  @include translate(0, -500%);
+  @include transition-transform("0.3s ease-out");
+}
+
+.modal-body{
+  padding: $space/2;
+}
+
+.modal-header,
+.modal-footer{
+  padding: $space/4 $space/2;
+}
+
+.modal-header{
+  border-bottom: $gray-lighter solid 1px;
+  
+  h2{
+    font-size: 20px;
+  }
+  
+}
+
+.modal-footer{
+  border-top: $gray-lighter solid 1px;
+  text-align: right;
+}
+	    </style>
+    </div>
+  </div>
     
 
 
